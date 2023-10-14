@@ -4,6 +4,7 @@ import lk.ijse.nexttravel.dto.GuideDTO;
 import lk.ijse.nexttravel.dto.HelloDto;
 import lk.ijse.nexttravel.repository.HeloRepo;
 import lk.ijse.nexttravel.service.GuideService;
+import lk.ijse.nexttravel.util.ResponseUtil;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -30,45 +31,38 @@ public class GuideController {
     //handle guid Post request
     @PostMapping("/save")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Mono<GuideDTO> saveGuide(@RequestBody GuideDTO guideDTO) {
-        if (guideDTO == null) {
-            throw new RuntimeException("GuideDto is null");
-        } else {
-            Mono<GuideDTO> guideDTOMono = guideService.saveGuide(guideDTO);
-            System.out.println("guid Saved");
-            return guideDTOMono;
-        }
-
+    public Mono<ResponseUtil> saveGuide(@RequestBody GuideDTO guideDTO) {
+        Mono<GuideDTO> guideDTOMono = guideService.saveGuide(guideDTO);
+        return guideDTOMono.map(savedGuide ->
+                new ResponseUtil(200, "Guide saved Success...", null));
     }
 
     //handle guid get request
     @GetMapping("{guidId}")
-    public Mono<GuideDTO> getGuide(@PathVariable String guidId) {
-        if (guidId == null) {
-            throw new RuntimeException("GuideId is null");
-        } else {
-            Mono<GuideDTO> guideData = guideService.getGuide(guidId);
-            return guideData;
-        }
+    public Mono<ResponseUtil> getGuide(@PathVariable String guidId) {
+        return guideService.getGuide(guidId).map(guide ->
+                new ResponseUtil(200, guidId + "Retrieved Success...", guide));
     }
 
     //handle get all guides request
     @GetMapping("/getAll")
-    public Flux<GuideDTO> getAllGuides() {
-        return guideService.getAllGuides();
+    public Flux<ResponseUtil> getAllGuides() {
+        return guideService.getAllGuides().map(allGuides ->
+                new ResponseUtil(200, "All Guides Fetched...", allGuides));
     }
 
     //handle PUt request to update guide details
     @PutMapping("{guidId}")
-    public Mono<GuideDTO> updateGuidData(@RequestBody GuideDTO guideDTO, @PathVariable String guidId) {
-        Mono<GuideDTO> updatedGuide = guideService.updateGuide(guideDTO, guidId);
-        return updatedGuide;
+    public Mono<ResponseUtil> updateGuidData(@RequestBody GuideDTO guideDTO, @PathVariable String guidId) {
+        return guideService.updateGuide(guideDTO, guidId).map(updatedGuid ->
+                new ResponseUtil(200, "Guid updated Success...", null));
     }
 
     //handle Delete request to delete guide details by id
     @DeleteMapping("{guidId}")
-    public Mono<Void> deleteGuidData(@PathVariable String guidId) {
-        return guideService.deleteGuide(guidId);
+    public Mono<ResponseUtil> deleteGuidData(@PathVariable String guidId) {
+        return guideService.deleteGuide(guidId).map(removedGuid ->
+                new ResponseUtil(200, "Guid Removed...", null));
     }
 
     //    @PostMapping(value = "/customer-profile-pictures",consumes = )
@@ -82,9 +76,9 @@ public class GuideController {
     HeloRepo heloRepo;
 
 
- //save guid profile_img
+    //save guid profile_img
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/upload")
-    public Mono<HelloDto> uploadData(
+    public Mono<String> uploadData(
             @RequestPart("name") String name,
             @RequestPart("address") String address,
             @RequestPart("image") Part image, // Use Part instead of MultipartFile
@@ -98,13 +92,9 @@ public class GuideController {
                     return content;
                 })
                 .flatMap(contentBytes -> heloRepo.save(new HelloDto(id, name, address, contentBytes)))
-                .map(data ->new HelloDto(data.getId(),data.getName(),data.getAddress(),data.getProfile()));
-    }
+                .map(data -> "Details saved Successfully :" + id);
 
-    @GetMapping(value = "/image/{name}", produces = MediaType.IMAGE_PNG_VALUE)
-    public Mono<byte[]> getImage(@PathVariable String name) {
-        return heloRepo.findByName(name)
-                .map(HelloDto::getProfile);
+
     }
 
 
