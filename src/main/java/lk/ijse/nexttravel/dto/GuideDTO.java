@@ -15,6 +15,7 @@ public class GuideDTO {
     private String contact;
     private String experience;
     private double dayValue;
+    private byte[] guideProfile;
     private String remarks;
     private int policyId;
 }

@@ -1,12 +1,24 @@
 package lk.ijse.nexttravel.controller;
 
 import lk.ijse.nexttravel.dto.GuideDTO;
+import lk.ijse.nexttravel.dto.HelloDto;
+import lk.ijse.nexttravel.repository.HeloRepo;
 import lk.ijse.nexttravel.service.GuideService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.io.IOException;
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/api")
@@ -55,7 +67,45 @@ public class GuideController {
 
     //handle Delete request to delete guide details by id
     @DeleteMapping("{guidId}")
-    public Mono<Void>deleteGuidData(@PathVariable String guidId){
+    public Mono<Void> deleteGuidData(@PathVariable String guidId) {
         return guideService.deleteGuide(guidId);
     }
+
+    //    @PostMapping(value = "/customer-profile-pictures",consumes = )
+    public Mono<HelloDto> saveProfilePicture(@RequestBody HelloDto helloDto, @RequestParam("image") byte[] image) {
+        helloDto.setProfile(image);
+        System.out.println(helloDto);
+        return null;
+    }
+
+    @Autowired
+    HeloRepo heloRepo;
+
+
+ //save guid profile_img
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/upload")
+    public Mono<HelloDto> uploadData(
+            @RequestPart("name") String name,
+            @RequestPart("address") String address,
+            @RequestPart("image") Part image, // Use Part instead of MultipartFile
+            @RequestPart("id") String id
+    ) {
+        return DataBufferUtils.join(image.content())
+                .map(dataBuffer -> {
+                    byte[] content = new byte[dataBuffer.readableByteCount()];
+                    dataBuffer.read(content);
+                    DataBufferUtils.release(dataBuffer);
+                    return content;
+                })
+                .flatMap(contentBytes -> heloRepo.save(new HelloDto(id, name, address, contentBytes)))
+                .map(data ->new HelloDto(data.getId(),data.getName(),data.getAddress(),data.getProfile()));
+    }
+
+    @GetMapping(value = "/image/{name}", produces = MediaType.IMAGE_PNG_VALUE)
+    public Mono<byte[]> getImage(@PathVariable String name) {
+        return heloRepo.findByName(name)
+                .map(HelloDto::getProfile);
+    }
+
+
 }

@@ -27,8 +27,10 @@ public class Guide{
     private String experience;
     @Column(nullable = false)
     private double dayValue;
-    @Column(nullable = false,columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String remarks;
+    @Column(nullable = false)
+    private byte[] guideProfile;
     @Column(nullable = false)
     private int policyId;
 }
