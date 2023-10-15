@@ -48,6 +48,6 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Mono<Void> deleteVehicle(int vehicleId) {
-        return null;
+        return vehicleRepository.deleteByVehicleId(vehicleId);
     }
 }

@@ -40,6 +40,7 @@ public class VehicleController{
 
     @DeleteMapping("{vehicleId}")
     public Mono<ResponseUtil> deleteVehicleData(@PathVariable int vehicleId) {
-        return null;
+        return vehicleService.deleteVehicle(vehicleId).map(deletedVehicle ->
+                new ResponseUtil(200,vehicleId+" Deleted Success",null));
     }
 }
