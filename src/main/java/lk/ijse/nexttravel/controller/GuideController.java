@@ -30,10 +30,10 @@ public class GuideController {
     }
 
     //handle guid get request
-    @GetMapping("{guidId}")
-    public Mono<ResponseUtil> getGuide(@PathVariable String guidId) {
-        return guideService.getGuide(guidId).map(guide ->
-                new ResponseUtil(200, guidId + " Retrieved Success...", guide));
+    @GetMapping("{guidName}")
+    public Mono<ResponseUtil> getGuide(@PathVariable String guidName) {
+        return guideService.getGuide(guidName).map(guide ->
+                new ResponseUtil(200, guidName + " Retrieved Success...", guide));
     }
 
     //handle get all guides request

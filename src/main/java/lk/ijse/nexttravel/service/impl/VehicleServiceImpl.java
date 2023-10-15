@@ -30,9 +30,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     //get Vehicle details from db
     @Override
-    public Mono<VehicleDTO> getVehicle(int vehicleId) {
-        Mono<Vehicle> byVehicleId = vehicleRepository.findByVehicleId(vehicleId);
-        return byVehicleId.map(vehicle ->
+    public Mono<VehicleDTO> getVehicle(String vehicleName) {
+        Mono<Vehicle> byVehicleName = vehicleRepository.findByVehicleName(vehicleName);
+        return byVehicleName.map(vehicle ->
                 modelMapper.map(vehicle, VehicleDTO.class));
     }
 

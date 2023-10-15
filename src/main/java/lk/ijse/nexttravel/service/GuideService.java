@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface GuideService {
     Mono<GuideDTO>saveGuide(GuideDTO guideDTO);
-    Mono<GuideDTO>getGuide(String guideId);
+    Mono<GuideDTO>getGuide(String guidName);
     Flux<GuideDTO>getAllGuides();
     Mono<GuideDTO>updateGuide(GuideDTO guideDTO,String guidId);
     Mono<Void>deleteGuide(String guidId);

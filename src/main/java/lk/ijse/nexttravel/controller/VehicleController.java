@@ -23,10 +23,10 @@ public class VehicleController {
     }
 
     //handle vehicle by Id Get request
-    @GetMapping("{vehicleId}")
-    public Mono<ResponseUtil> getVehicleData(@PathVariable int vehicleId) {
-        return vehicleService.getVehicle(vehicleId).map(vehicle ->
-                new ResponseUtil(200, vehicleId + "Vehicle Retrieved", vehicle));
+    @GetMapping("{vehicleName}")
+    public Mono<ResponseUtil> getVehicleData(@PathVariable String vehicleName) {
+        return vehicleService.getVehicle(vehicleName).map(vehicle ->
+                new ResponseUtil(200, vehicleName + "Vehicle Retrieved", vehicle));
     }
 
     //handle getAll vehicle request

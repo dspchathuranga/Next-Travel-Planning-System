@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface VehicleRepository extends ReactiveMongoRepository<Vehicle,Integer> {
+    Mono<Vehicle>findByVehicleName(String vehicleName);
     Mono<Vehicle>findByVehicleId(int vehicleId);
     Mono<Void>deleteByVehicleId(int vehicleId);
 }

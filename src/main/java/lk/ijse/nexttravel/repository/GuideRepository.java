@@ -7,6 +7,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface GuideRepository extends ReactiveMongoRepository<Guide,String> {
+    Mono<Guide>findByGuidName(String guidName);
     Mono<Guide>findByGuidId(String guidId);
     Mono<Void>deleteByGuidId(String guidId);
 }

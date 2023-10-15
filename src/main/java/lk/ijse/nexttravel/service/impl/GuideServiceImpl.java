@@ -30,8 +30,8 @@ public class GuideServiceImpl implements GuideService {
 
     //get guid details by guid id
     @Override
-    public Mono<GuideDTO> getGuide(String guideId) {
-        Mono<Guide> guidMono = guideRepository.findByGuidId(guideId);
+    public Mono<GuideDTO> getGuide(String guidName) {
+        Mono<Guide> guidMono = guideRepository.findByGuidName(guidName);
         return guidMono.map(guide -> modelMapper.map(guide, GuideDTO.class));
     }
 
@@ -63,6 +63,6 @@ public class GuideServiceImpl implements GuideService {
     //Delete guid details by guid id
     @Override
     public Mono<Void> deleteGuide(String guidId) {
-       return guideRepository.deleteByGuidId(guidId);
+        return guideRepository.deleteByGuidId(guidId);
     }
 }
