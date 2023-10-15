@@ -25,7 +25,7 @@ public class VehicleServiceImpl implements VehicleService {
     public Mono<VehicleDTO> saveVehicle(VehicleDTO vehicleDTO) {
         Vehicle vehicleSave = modelMapper.map(vehicleDTO, Vehicle.class);
         return vehicleRepository.save(vehicleSave).map(savedVehicle ->
-                modelMapper.map(savedVehicle,VehicleDTO.class));
+                modelMapper.map(savedVehicle, VehicleDTO.class));
     }
 
     //get Vehicle details from db
@@ -33,14 +33,14 @@ public class VehicleServiceImpl implements VehicleService {
     public Mono<VehicleDTO> getVehicle(int vehicleId) {
         Mono<Vehicle> byVehicleId = vehicleRepository.findByVehicleId(vehicleId);
         return byVehicleId.map(vehicle ->
-                modelMapper.map(vehicle,VehicleDTO.class));
+                modelMapper.map(vehicle, VehicleDTO.class));
     }
 
     //get all Vehicle details from db
     @Override
     public Flux<VehicleDTO> getAllVehicles() {
         Flux<Vehicle> allVehicles = vehicleRepository.findAll();
-        return allVehicles.map(vehicles -> modelMapper.map(vehicles,VehicleDTO.class))
+        return allVehicles.map(vehicles -> modelMapper.map(vehicles, VehicleDTO.class))
                 .switchIfEmpty(Flux.empty());
     }
 
@@ -60,7 +60,7 @@ public class VehicleServiceImpl implements VehicleService {
             existvehicle.setRemarks(vehicleDTO.getRemarks());
             existvehicle.setCanPolicy(vehicleDTO.getCanPolicy());
             return vehicleRepository.save(existvehicle);
-        }).map(vehicle -> modelMapper.map(vehicle,VehicleDTO.class));
+        }).map(vehicle -> modelMapper.map(vehicle, VehicleDTO.class));
     }
 
     //delete Vehicle details in db

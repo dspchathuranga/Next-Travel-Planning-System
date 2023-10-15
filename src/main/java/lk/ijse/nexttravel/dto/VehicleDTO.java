@@ -15,7 +15,7 @@ public class VehicleDTO {
     private String isHybrid;
     private int fuelUsage;
     private int seatCount;
-    private int transmissionType;
+    private String transmissionType;
     private double vehicle1kmCharge;
     private String remarks;
     private String canPolicy;
