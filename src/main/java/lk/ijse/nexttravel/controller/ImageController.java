@@ -25,6 +25,6 @@ public class ImageController {
     @GetMapping("/image/{imageId}")
     public Mono<ResponseUtil> getImageUrl(@PathVariable String imageId) {
         return imageService.getImageUrlById(imageId).map(getFile->
-                new ResponseUtil(200,imageId" fetch success",getFile));
+                new ResponseUtil(200,imageId+" fetch success",getFile));
     }
 }
