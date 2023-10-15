@@ -31,4 +31,11 @@ public class ImageServiceImpl implements ImageService {
                     return imageRepository.save(image).map(Image::getImageUrl);
                 });
     }
+
+    @Override
+    public Mono<String> getImageUrlById(String imageId) {
+        return imageRepository.findById(imageId)
+                .map(Image::getImageUrl)
+                .switchIfEmpty(Mono.error(new RuntimeException("Image not found")));
+    }
 }

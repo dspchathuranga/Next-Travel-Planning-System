@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface ImageService {
     Mono<String> SaveImageLocally(FilePart filePart);
+    Mono<String> getImageUrlById(String imageId);
 }
