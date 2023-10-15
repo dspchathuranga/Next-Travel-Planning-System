@@ -43,7 +43,20 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Mono<VehicleDTO> updateVehicle(VehicleDTO vehicleDTO, int vehicleId) {
-        return null;
+        Mono<Vehicle> updateByVehicleId = vehicleRepository.findByVehicleId(vehicleId);
+        return updateByVehicleId.flatMap(existvehicle -> {
+            existvehicle.setVehicleCategory(vehicleDTO.getVehicleCategory());
+            existvehicle.setVehicleName(vehicleDTO.getVehicleName());
+            existvehicle.setFuelType(vehicleDTO.getFuelType());
+            existvehicle.setIsHybrid(vehicleDTO.getIsHybrid());
+            existvehicle.setFuelUsage(vehicleDTO.getFuelUsage());
+            existvehicle.setSeatCount(vehicleDTO.getSeatCount());
+            existvehicle.setTransmissionType(vehicleDTO.getTransmissionType());
+            existvehicle.setVehicle1kmCharge(vehicleDTO.getVehicle1kmCharge());
+            existvehicle.setRemarks(vehicleDTO.getRemarks());
+            existvehicle.setCanPolicy(vehicleDTO.getCanPolicy());
+            return vehicleRepository.save(existvehicle);
+        }).map(vehicle -> modelMapper.map(vehicle,VehicleDTO.class));
     }
 
     @Override

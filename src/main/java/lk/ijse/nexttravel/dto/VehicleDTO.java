@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class VehicleDTO {
     private int vehicleId;
     private String vehicleCategory;
-    private String vehicle_name;
+    private String vehicleName;
     private String fuelType;
     private String isHybrid;
     private int fuelUsage;
