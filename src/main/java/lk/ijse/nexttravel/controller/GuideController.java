@@ -32,8 +32,7 @@ public class GuideController {
     @PostMapping("/save")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<ResponseUtil> saveGuide(@RequestBody GuideDTO guideDTO) {
-        Mono<GuideDTO> guideDTOMono = guideService.saveGuide(guideDTO);
-        return guideDTOMono.map(savedGuide ->
+        return guideService.saveGuide(guideDTO).map(savedGuide ->
                 new ResponseUtil(200, "Guide saved Success...", null));
     }
 
@@ -65,13 +64,6 @@ public class GuideController {
                 new ResponseUtil(200, "Guid Removed...", null));
     }
 
-    //    @PostMapping(value = "/customer-profile-pictures",consumes = )
-    public Mono<HelloDto> saveProfilePicture(@RequestBody HelloDto helloDto, @RequestParam("image") byte[] image) {
-        helloDto.setProfile(image);
-        System.out.println(helloDto);
-        return null;
-    }
-
     @Autowired
     HeloRepo heloRepo;
 
@@ -93,7 +85,6 @@ public class GuideController {
                 })
                 .flatMap(contentBytes -> heloRepo.save(new HelloDto(id, name, address, contentBytes)))
                 .map(data -> "Details saved Successfully :" + id);
-
 
     }
 
