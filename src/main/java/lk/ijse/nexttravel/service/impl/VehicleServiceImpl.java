@@ -1,15 +1,24 @@
 package lk.ijse.nexttravel.service.impl;
 
 import lk.ijse.nexttravel.dto.VehicleDTO;
+import lk.ijse.nexttravel.repository.VehicleRepository;
 import lk.ijse.nexttravel.service.VehicleService;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class VehicleServiceImpl implements VehicleService {
+
+    private final VehicleRepository vehicleRepository;
+
+    private final ModelMapper modelMapper;
+
     @Override
     public Mono<VehicleDTO> saveVehicle(VehicleDTO vehicleDTO) {
         return null;

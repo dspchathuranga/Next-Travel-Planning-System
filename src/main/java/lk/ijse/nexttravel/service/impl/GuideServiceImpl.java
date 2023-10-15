@@ -4,6 +4,7 @@ import lk.ijse.nexttravel.dto.GuideDTO;
 import lk.ijse.nexttravel.entity.Guide;
 import lk.ijse.nexttravel.repository.GuideRepository;
 import lk.ijse.nexttravel.service.GuideService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,13 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class GuideServiceImpl implements GuideService {
-    @Autowired
-    ModelMapper modelMapper;
 
-    @Autowired
-    GuideRepository guideRepository;
+    private final ModelMapper modelMapper;
+
+    private final GuideRepository guideRepository;
 
     //save guid details in db
     @Override

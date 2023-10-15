@@ -5,6 +5,7 @@ import lk.ijse.nexttravel.dto.HelloDto;
 import lk.ijse.nexttravel.repository.HeloRepo;
 import lk.ijse.nexttravel.service.GuideService;
 import lk.ijse.nexttravel.util.ResponseUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -22,11 +23,11 @@ import java.io.IOException;
 import java.util.Base64;
 
 @RestController
-@RequestMapping("/api")
+@RequiredArgsConstructor
+@RequestMapping("/api/guide")
 public class GuideController {
 
-    @Autowired
-    GuideService guideService;
+    private final GuideService guideService;
 
     //handle guid Post request
     @PostMapping("/save")
@@ -40,7 +41,7 @@ public class GuideController {
     @GetMapping("{guidId}")
     public Mono<ResponseUtil> getGuide(@PathVariable String guidId) {
         return guideService.getGuide(guidId).map(guide ->
-                new ResponseUtil(200, guidId + "Retrieved Success...", guide));
+                new ResponseUtil(200, guidId + " Retrieved Success...", guide));
     }
 
     //handle get all guides request
