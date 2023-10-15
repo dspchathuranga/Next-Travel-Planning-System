@@ -17,6 +17,7 @@ public class ImageServiceImpl implements ImageService {
 
     private final ImageRepository imageRepository;
 
+    //save file to the local storage
     @Override
     public Mono<String> SaveImageLocally(FilePart filePart) {
         String directory = "D:\\Spring-Boot-Projects\\NextTravel Images";
@@ -28,10 +29,12 @@ public class ImageServiceImpl implements ImageService {
                 .flatMap(url -> {
                     Image image = new Image();
                     image.setImageUrl(url);
+                    //save file url in the db
                     return imageRepository.save(image).map(Image::getImageUrl);
                 });
     }
 
+    //retrieve file from database file url
     @Override
     public Mono<String> getImageUrlById(String imageId) {
         return imageRepository.findById(imageId)

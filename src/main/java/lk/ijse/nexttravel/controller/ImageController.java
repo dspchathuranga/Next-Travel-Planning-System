@@ -13,11 +13,13 @@ public class ImageController {
 
     private final ImageService imageService;
 
+    //handle file save req
     @PostMapping("/upload")
     public Mono<String> uploadImage(@RequestPart("file") FilePart filePart) {
         return imageService.SaveImageLocally(filePart);
     }
 
+    //handle file get req
     @GetMapping("/image/{imageId}")
     public Mono<String> getImageUrl(@PathVariable String imageId) {
         return imageService.getImageUrlById(imageId);
