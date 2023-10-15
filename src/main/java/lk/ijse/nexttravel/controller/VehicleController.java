@@ -23,12 +23,14 @@ public class VehicleController{
 
     @GetMapping("{vehicleId}")
     public Mono<ResponseUtil> getVehicleData(@PathVariable int vehicleId) {
-        return null;
+        return vehicleService.getVehicle(vehicleId).map(vehicle->
+                new ResponseUtil(200,vehicleId+"Vehicle Retrieved",vehicle));
     }
 
     @GetMapping("/getAll")
     public Flux<ResponseUtil> getAllVehiclesData() {
-        return null;
+        return vehicleService.getAllVehicles().map(vehicles ->
+                new ResponseUtil(200,"Get All vehicles",vehicles));
     }
 
     @PutMapping("{vehicleId}")

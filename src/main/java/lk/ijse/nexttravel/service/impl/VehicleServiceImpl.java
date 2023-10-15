@@ -29,12 +29,16 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Mono<VehicleDTO> getVehicle(int vehicleId) {
-        return null;
+        Mono<Vehicle> byVehicleId = vehicleRepository.findByVehicleId(vehicleId);
+        return byVehicleId.map(vehicle ->
+                modelMapper.map(vehicle,VehicleDTO.class));
     }
 
     @Override
     public Flux<VehicleDTO> getAllVehicles() {
-        return null;
+        Flux<Vehicle> allVehicles = vehicleRepository.findAll();
+        return allVehicles.map(vehicles -> modelMapper.map(vehicles,VehicleDTO.class))
+                .switchIfEmpty(Flux.empty());
     }
 
     @Override
