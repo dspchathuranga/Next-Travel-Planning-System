@@ -17,7 +17,7 @@ public class VehicleController{
 
     @PostMapping("/save")
     public Mono<ResponseUtil> saveVehicleData(@RequestBody VehicleDTO vehicleDTO) {
-        vehicleService.saveVehicle(vehicleDTO).map(savedVehicle ->
+        return vehicleService.saveVehicle(vehicleDTO).map(savedVehicle ->
                 new ResponseUtil(200,"Vehicle Saved",null));
     }
 

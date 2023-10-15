@@ -1,6 +1,7 @@
 package lk.ijse.nexttravel.service.impl;
 
 import lk.ijse.nexttravel.dto.VehicleDTO;
+import lk.ijse.nexttravel.entity.Vehicle;
 import lk.ijse.nexttravel.repository.VehicleRepository;
 import lk.ijse.nexttravel.service.VehicleService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Mono<VehicleDTO> saveVehicle(VehicleDTO vehicleDTO) {
-        return null;
+        Vehicle vehicleSave = modelMapper.map(vehicleDTO, Vehicle.class);
+        return vehicleRepository.save(vehicleSave).map(savedVehicle ->
+                modelMapper.map(savedVehicle,VehicleDTO.class));
     }
 
     @Override
