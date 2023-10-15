@@ -20,6 +20,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     private final ModelMapper modelMapper;
 
+    //save Vehicle details from db
     @Override
     public Mono<VehicleDTO> saveVehicle(VehicleDTO vehicleDTO) {
         Vehicle vehicleSave = modelMapper.map(vehicleDTO, Vehicle.class);
@@ -27,6 +28,7 @@ public class VehicleServiceImpl implements VehicleService {
                 modelMapper.map(savedVehicle,VehicleDTO.class));
     }
 
+    //get Vehicle details from db
     @Override
     public Mono<VehicleDTO> getVehicle(int vehicleId) {
         Mono<Vehicle> byVehicleId = vehicleRepository.findByVehicleId(vehicleId);
@@ -34,6 +36,7 @@ public class VehicleServiceImpl implements VehicleService {
                 modelMapper.map(vehicle,VehicleDTO.class));
     }
 
+    //get all Vehicle details from db
     @Override
     public Flux<VehicleDTO> getAllVehicles() {
         Flux<Vehicle> allVehicles = vehicleRepository.findAll();
@@ -41,6 +44,7 @@ public class VehicleServiceImpl implements VehicleService {
                 .switchIfEmpty(Flux.empty());
     }
 
+    //update Vehicle details in db
     @Override
     public Mono<VehicleDTO> updateVehicle(VehicleDTO vehicleDTO, int vehicleId) {
         Mono<Vehicle> updateByVehicleId = vehicleRepository.findByVehicleId(vehicleId);
@@ -59,6 +63,7 @@ public class VehicleServiceImpl implements VehicleService {
         }).map(vehicle -> modelMapper.map(vehicle,VehicleDTO.class));
     }
 
+    //delete Vehicle details in db
     @Override
     public Mono<Void> deleteVehicle(int vehicleId) {
         return vehicleRepository.deleteByVehicleId(vehicleId);

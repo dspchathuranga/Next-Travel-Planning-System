@@ -6,21 +6,13 @@ import lk.ijse.nexttravel.repository.HeloRepo;
 import lk.ijse.nexttravel.service.GuideService;
 import lk.ijse.nexttravel.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.http.codec.multipart.Part;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.io.IOException;
-import java.util.Base64;
 
 @RestController
 @RequiredArgsConstructor
@@ -65,7 +57,6 @@ public class GuideController {
                 new ResponseUtil(200, "Guid Removed...", null));
     }
 
-    @Autowired
     HeloRepo heloRepo;
 
 
