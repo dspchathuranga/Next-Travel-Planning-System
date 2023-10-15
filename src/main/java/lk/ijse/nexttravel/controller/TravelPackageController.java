@@ -17,26 +17,31 @@ public class TravelPackageController {
 
     @PostMapping("/save")
     public Mono<ResponseUtil> savePackageDetails(@RequestBody TravelPackageDTO packageDTO) {
-        return null;
+        return packageService.savePackage(packageDTO).map(savedPackage ->
+                new ResponseUtil(200,"package saved",null));
     }
 
     @GetMapping("{packageName}")
     public Mono<ResponseUtil> getPackageDetails(@PathVariable String packageName) {
-        return null;
+        return packageService.getPackage(packageName).map(searchPackage ->
+                new ResponseUtil(200,"search package data",searchPackage));
     }
 
     @GetMapping("/getAll")
     public Flux<ResponseUtil> getAllPackageDetails() {
-        return null;
+        return packageService.getAllPackages().map(allPackages ->
+                new ResponseUtil(200,"fetch all packages",allPackages));
     }
 
     @PutMapping("{packageId}")
     public Mono<ResponseUtil> updatePackageDetails(@RequestBody TravelPackageDTO packageDTO,@PathVariable int packageId) {
-        return null;
+        return packageService.updatePackage(packageDTO,packageId).map(updatedPackage ->
+                new ResponseUtil(200,"Package updated",null));
     }
 
     @DeleteMapping("{packageId}")
     public Mono<ResponseUtil> deletePackage(@PathVariable int packageId) {
-        return null;
+        return packageService.deletePackage(packageId).map(deletedPackage ->
+                new ResponseUtil(200,"package deleted",null));
     }
 }
