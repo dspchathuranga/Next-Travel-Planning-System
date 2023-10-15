@@ -21,6 +21,8 @@ public class GuideController {
 
     private final GuideService guideService;
 
+    private final HeloRepo heloRepo;
+
     //handle guid Post request
     @PostMapping("/save")
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -57,28 +59,33 @@ public class GuideController {
                 new ResponseUtil(200, "Guid Removed...", null));
     }
 
-    HeloRepo heloRepo;
 
 
-    //save guid profile_img
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/upload")
-    public Mono<String> uploadData(
-            @RequestPart("name") String name,
-            @RequestPart("address") String address,
-            @RequestPart("image") Part image, // Use Part instead of MultipartFile
-            @RequestPart("id") String id
-    ) {
-        return DataBufferUtils.join(image.content())
-                .map(dataBuffer -> {
-                    byte[] content = new byte[dataBuffer.readableByteCount()];
-                    dataBuffer.read(content);
-                    DataBufferUtils.release(dataBuffer);
-                    return content;
-                })
-                .flatMap(contentBytes -> heloRepo.save(new HelloDto(id, name, address, contentBytes)))
-                .map(data -> "Details saved Successfully :" + id);
-
-    }
+//    //save guid profile_img
+//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/upload")
+//    public Mono<String> uploadData(
+//            @RequestPart("name") String name,
+//            @RequestPart("address") String address,
+//            @RequestPart("image") Part image, // Use Part instead of MultipartFile
+//            @RequestPart("id") String id
+//    ) {
+//        return DataBufferUtils.join(image.content())
+//                .map(dataBuffer -> {
+//                    byte[] content = new byte[dataBuffer.readableByteCount()];
+//                    dataBuffer.read(content);
+//                    DataBufferUtils.release(dataBuffer);
+//                    return content;
+//                })
+//                .flatMap(contentBytes -> heloRepo.save(new HelloDto(id, name, address, contentBytes)))
+//                .map(data -> "Details saved Successfully :" + id);
+//
+//    }
+//
+//    @GetMapping(value = "/image/{name}", produces = MediaType.IMAGE_PNG_VALUE)
+//    public Mono<byte[]> getImage(@PathVariable String name) {
+//        return heloRepo.findByName(name)
+//                .map(HelloDto::getProfile);
+//    }
 
 
 }
