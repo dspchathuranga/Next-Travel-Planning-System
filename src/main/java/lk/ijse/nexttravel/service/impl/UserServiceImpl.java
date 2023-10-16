@@ -4,21 +4,23 @@ import lk.ijse.nexttravel.dto.UserDTO;
 import lk.ijse.nexttravel.entity.User;
 import lk.ijse.nexttravel.repository.UserRepository;
 import lk.ijse.nexttravel.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private final ModelMapper modelMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     //save User details in db
     @Override
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Mono<UserDTO> updateUsers(UserDTO userDTO, String userId) {
         Mono<User> updateUser = userRepository.findByUserId(userId);
-        return updateUser.flatMap((existUser) ->{
+        return updateUser.flatMap((existUser) -> {
             existUser.setUserName(userDTO.getUserName());
             existUser.setUserPassword(userDTO.getUserPassword());
             existUser.setUserContactNo(userDTO.getUserContactNo());
@@ -56,7 +58,7 @@ public class UserServiceImpl implements UserService {
             existUser.setAddress(userDTO.getAddress());
             existUser.setRemarks(userDTO.getRemarks());
             return userRepository.save(existUser);
-        }).map(user->modelMapper.map(user,UserDTO.class));
+        }).map(user -> modelMapper.map(user, UserDTO.class));
     }
 
     //Delete User details in db
