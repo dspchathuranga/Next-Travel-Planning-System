@@ -17,26 +17,31 @@ public class UserController {
 
     @PostMapping("/save")
     public Mono<ResponseUtil> saveUser(@RequestBody UserDTO userDTO) {
-        return null;
+        return userService.saveUser(userDTO).map(savedUser ->
+                new ResponseUtil(200,"User Saved",null));
     }
 
     @GetMapping("{userName}")
     public Mono<ResponseUtil> getUser(@PathVariable String userName) {
-        return null;
+        return userService.getUser(userName).map(getUserData ->
+                new ResponseUtil(200,"User Fetch",getUserData));
     }
 
     @GetMapping("/getAll")
     public Flux<ResponseUtil> getAllUsers() {
-        return null;
+        return userService.getAllUsers().map(allUsers ->
+                new ResponseUtil(200,"get All users",allUsers));
     }
 
     @PutMapping("{userId}")
     public Mono<ResponseUtil> updateUsers( @RequestBody UserDTO userDTO, @PathVariable String userId) {
-        return null;
+        return userService.updateUsers(userDTO,userId).map(updateUser ->
+                new ResponseUtil(200,"Update User",null));
     }
 
     @DeleteMapping("{userId}")
     public Mono<ResponseUtil> deleteUser(@PathVariable String userId) {
-        return null;
+        return userService.deleteUser(userId).map(deleteUser ->
+                new ResponseUtil(200,userId+" User Deleted",null));
     }
 }
