@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private final ModelMapper modelMapper;
 
+    //save User details in db
     @Override
     public Mono<UserDTO> saveUser(UserDTO userDTO) {
         User userData = modelMapper.map(userDTO, User.class);
@@ -27,18 +28,21 @@ public class UserServiceImpl implements UserService {
                 modelMapper.map(user, UserDTO.class));
     }
 
+    //get User details from db
     @Override
     public Mono<UserDTO> getUser(String userName) {
         Mono<User> byUserName = userRepository.findByUserName(userName);
         return byUserName.map(getUser -> modelMapper.map(getUser, UserDTO.class));
     }
 
+    //get all User details from db
     @Override
     public Flux<UserDTO> getAllUsers() {
         Flux<User> users = userRepository.findAll();
         return users.map(allUsers -> modelMapper.map(allUsers, UserDTO.class));
     }
 
+    //Update User details in db
     @Override
     public Mono<UserDTO> updateUsers(UserDTO userDTO, String userId) {
         Mono<User> updateUser = userRepository.findByUserId(userId);
@@ -55,6 +59,7 @@ public class UserServiceImpl implements UserService {
         }).map(user->modelMapper.map(user,UserDTO.class));
     }
 
+    //Delete User details in db
     @Override
     public Mono<Void> deleteUser(String userId) {
         return userRepository.deleteByUserId(userId);
