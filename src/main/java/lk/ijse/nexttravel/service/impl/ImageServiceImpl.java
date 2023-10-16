@@ -41,4 +41,16 @@ public class ImageServiceImpl implements ImageService {
                 .map(Image::getImageUrl)
                 .switchIfEmpty(Mono.error(new RuntimeException("Image not found")));
     }
+
+    @Override
+    public Mono<String> getFilePathById(String imageId) {
+        return null;
+    }
+
+//    @Override
+//    public Mono<String> getFilePathById(String imageId) {
+//        return imageRepository.findById(imageId)
+//                .map(Image::getImageUrl)
+//                .switchIfEmpty(Mono.error(new RuntimeException("Image not found")));
+//    }
 }
