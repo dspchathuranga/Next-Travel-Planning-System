@@ -1,7 +1,5 @@
 package lk.ijse.nexttravel.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String imageUrl;
 }
