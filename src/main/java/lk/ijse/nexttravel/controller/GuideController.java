@@ -1,15 +1,10 @@
 package lk.ijse.nexttravel.controller;
 
 import lk.ijse.nexttravel.dto.GuideDTO;
-import lk.ijse.nexttravel.dto.HelloDto;
-import lk.ijse.nexttravel.repository.HeloRepo;
 import lk.ijse.nexttravel.service.GuideService;
 import lk.ijse.nexttravel.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.codec.multipart.Part;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,7 +16,7 @@ public class GuideController {
 
     private final GuideService guideService;
 
-    private final HeloRepo heloRepo;
+//    private final HeloRepo heloRepo;
 
     //handle guid Post request
     @PostMapping("/save")
@@ -58,7 +53,6 @@ public class GuideController {
         return guideService.deleteGuide(guidId).map(removedGuid ->
                 new ResponseUtil(200, "Guid Removed...", null));
     }
-
 
 
 //    //save guid profile_img

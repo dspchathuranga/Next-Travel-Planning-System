@@ -11,7 +11,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 
 @SpringBootApplication
 @EnableWebFlux
-@ComponentScan(basePackages = "lk.ijse.nexttravel.repository")
+@EnableR2dbcRepositories
 public class NextTravelApplication {
 
 	public static void main(String[] args) {
