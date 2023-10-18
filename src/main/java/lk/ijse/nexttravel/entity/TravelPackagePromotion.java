@@ -18,7 +18,7 @@ public class TravelPackagePromotion {
     private int travel_package_id;
     private double hotel_discount;
     private double guide_discount;
-    private double vehical_discount;
+    private double vehicle_discount;
     private double travel_package_discount;
     private Date promotion_start_date;
     private Date promotion_end_date;

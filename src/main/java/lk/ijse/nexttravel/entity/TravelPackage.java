@@ -3,6 +3,7 @@ package lk.ijse.nexttravel.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document("Travel_package")
 public class TravelPackage {
+    @Id
     private int packageId;
     private String packageName;
     private String packageDescription;
