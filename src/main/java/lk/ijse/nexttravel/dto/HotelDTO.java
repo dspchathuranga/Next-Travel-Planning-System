@@ -12,10 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Data
 public class HotelDTO {
-    @Id
-    private int hotel_Id;
-    private String hotel_Name;
-    private int hotel_category_id;
+    private int hotelId;
+    private String hotelName;
+    private int hotelCategoryId;
     private String email;
     private String telephone;
     private String mobile;
@@ -26,7 +25,7 @@ public class HotelDTO {
     private double longitude;
     private double latitude;
     private String description;
-    private String website_link;
+    private String websiteLink;
     private String facebook;
     private String instagram;
     private String status;

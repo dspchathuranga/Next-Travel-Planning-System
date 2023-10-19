@@ -14,9 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "Hotel_details")
 public class Hotel {
     @Id
-    private int hotel_Id;
-    private String hotel_Name;
-    private int hotel_category_id;
+    private int hotelId;
+    private String hotelName;
+    private int hotelCategoryId;
     private String email;
     private String telephone;
     private String mobile;
@@ -27,7 +27,7 @@ public class Hotel {
     private double longitude;
     private double latitude;
     private String description;
-    private String website_link;
+    private String websiteLink;
     private String facebook;
     private String instagram;
     private String status;
