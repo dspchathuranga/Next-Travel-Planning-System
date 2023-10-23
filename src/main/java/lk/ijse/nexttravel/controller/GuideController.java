@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/guide")
+@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 public class GuideController {
 
     private final GuideService guideService;

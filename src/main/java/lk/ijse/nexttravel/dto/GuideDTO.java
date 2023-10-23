@@ -12,10 +12,11 @@ public class GuideDTO {
     private String guidName;
     private String address;
     private String gender;
+    private int age;
     private String contact;
     private String experience;
     private double dayValue;
-    private byte[] guideProfile;
+//    private byte[] guideProfile;
     private String remarks;
     private int policyId;
 }

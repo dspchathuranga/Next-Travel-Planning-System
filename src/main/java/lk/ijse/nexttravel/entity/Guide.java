@@ -16,10 +16,11 @@ public class Guide{
     private String guidName;
     private String address;
     private String gender;
+    private int age;
     private String contact;
     private String experience;
     private double dayValue;
     private String remarks;
-    private byte[] guideProfile;
+//    private byte[] guideProfile;
     private int policyId;
 }
