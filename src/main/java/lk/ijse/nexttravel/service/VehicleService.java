@@ -9,6 +9,6 @@ public interface VehicleService {
     Mono<VehicleDTO> saveVehicle(VehicleDTO vehicleDTO);
     Mono<VehicleDTO>getVehicle(String vehicleName);
     Flux<VehicleDTO> getAllVehicles();
-    Mono<VehicleDTO>updateVehicle(VehicleDTO vehicleDTO,int vehicleId);
+    Mono<VehicleDTO>updateVehicle(VehicleDTO vehicleDTO);
     Mono<Void>deleteVehicle(int vehicleId);
 }

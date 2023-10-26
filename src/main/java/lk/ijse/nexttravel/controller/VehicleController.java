@@ -38,10 +38,10 @@ public class VehicleController {
     }
 
     //handle vehicle update request
-    @PutMapping("{vehicleId}")
-    public Mono<ResponseUtil> updateVehicleData(@RequestBody VehicleDTO vehicleDTO, @PathVariable int vehicleId) {
-        return vehicleService.updateVehicle(vehicleDTO, vehicleId).map(updatedvehicle ->
-                new ResponseUtil(200, vehicleId + " Vehicle data Updated", null));
+    @PutMapping("/update")
+    public Mono<ResponseUtil> updateVehicleData(@RequestBody VehicleDTO vehicleDTO) {
+        return vehicleService.updateVehicle(vehicleDTO).map(updatedvehicle ->
+                new ResponseUtil(200, " Vehicle data Updated", null));
     }
 
     //handle vehicle delete by id request
