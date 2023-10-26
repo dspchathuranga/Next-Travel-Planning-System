@@ -58,7 +58,7 @@ public class VehicleServiceImpl implements VehicleService {
             existvehicle.setTransmissionType(vehicleDTO.getTransmissionType());
             existvehicle.setVehicle1kmCharge(vehicleDTO.getVehicle1kmCharge());
             existvehicle.setRemarks(vehicleDTO.getRemarks());
-            existvehicle.setCanPolicy(vehicleDTO.getCanPolicy());
+            existvehicle.setPolicyType(vehicleDTO.getPolicyType());
             return vehicleRepository.save(existvehicle);
         }).map(vehicle -> modelMapper.map(vehicle, VehicleDTO.class));
     }
