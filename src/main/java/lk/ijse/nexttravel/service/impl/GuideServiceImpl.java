@@ -6,6 +6,7 @@ import lk.ijse.nexttravel.repository.GuideRepository;
 import lk.ijse.nexttravel.service.GuideService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
@@ -28,6 +29,14 @@ public class GuideServiceImpl implements GuideService {
                 .map(savedGuid -> modelMapper.map(savedGuid, GuideDTO.class));
     }
 
+    //Auto genarated guidId
+    @Override
+    public Mono<String> generateGuideId() {
+        Mono<String> latestId = guideRepository.findLatestGuidId();
+        System.out.println("service :"+latestId);
+        return latestId;
+    }
+
     //get guid details by guid id
     @Override
     public Mono<GuideDTO> getGuide(String guidName) {
@@ -45,14 +54,14 @@ public class GuideServiceImpl implements GuideService {
 
     //update guid details by guid id
     @Override
-    public Mono<GuideDTO> updateGuide(GuideDTO guideDTO, String guidId) {
-        Mono<Guide> updateGuid = guideRepository.findByGuidId(guidId);
+    public Mono<GuideDTO> updateGuide(GuideDTO guideDTO) {
+        Mono<Guide> updateGuid = guideRepository.findById(guideDTO.getGuidId().trim());
         return updateGuid.flatMap((existguide) -> {
             existguide.setGuidName(guideDTO.getGuidName());
             existguide.setAddress(guideDTO.getAddress());
+            existguide.setAge(guideDTO.getAge());
             existguide.setContact(guideDTO.getContact());
             existguide.setExperience(guideDTO.getExperience());
-            existguide.setGender(guideDTO.getGender());
             existguide.setDayValue(guideDTO.getDayValue());
             existguide.setRemarks(guideDTO.getRemarks());
             existguide.setPolicyId(guideDTO.getPolicyId());
@@ -63,6 +72,8 @@ public class GuideServiceImpl implements GuideService {
     //Delete guid details by guid id
     @Override
     public Mono<Void> deleteGuide(String guidId) {
-        return guideRepository.deleteByGuidId(guidId);
+        Mono<Void> voidMono = guideRepository.deleteById(guidId);
+//        System.out.println("service delete "+voidMono);
+        return voidMono;
     }
 }

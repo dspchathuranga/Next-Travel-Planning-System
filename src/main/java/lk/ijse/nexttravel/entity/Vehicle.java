@@ -17,10 +17,12 @@ public class Vehicle {
     private String vehicleName;
     private String fuelType;
     private String isHybrid;
-    private int fuelUsage;
+    private String fuelUsage;
     private int seatCount;
     private String transmissionType;
+    private double fuelUsageCost;
+    private double perDayCharge;
     private double vehicle1kmCharge;
     private String remarks;
-    private String canPolicy;
+    private String policyType;
 }

@@ -5,6 +5,7 @@ import lk.ijse.nexttravel.service.GuideService;
 import lk.ijse.nexttravel.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,15 +21,25 @@ public class GuideController {
 //    private final HeloRepo heloRepo;
 
     //handle guid Post request
-    @PostMapping("/save")
+    @PostMapping(value = "/save",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<ResponseUtil> saveGuide(@RequestBody GuideDTO guideDTO) {
         return guideService.saveGuide(guideDTO).map(savedGuide ->
                 new ResponseUtil(200, "Guide saved Success...", null));
     }
 
+//    //handle autoGenaratedGuidId
+    @GetMapping(value = "/latestId",produces =MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseUtil>generateGuideId() {
+        System.out.println("i came");
+       return guideService.generateGuideId().map(newId->{
+           System.out.println("new Id :"+newId);
+           return new ResponseUtil(200,"genarated Id",newId);
+       });
+    }
+
     //handle guid get request
-    @GetMapping("{guidName}")
+    @GetMapping(path = "{guidName}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseUtil> getGuide(@PathVariable String guidName) {
         return guideService.getGuide(guidName).map(guide ->
                 new ResponseUtil(200, guidName + " Retrieved Success...", guide));
@@ -42,17 +53,17 @@ public class GuideController {
     }
 
     //handle PUt request to update guide details
-    @PutMapping("{guidId}")
-    public Mono<ResponseUtil> updateGuidData(@RequestBody GuideDTO guideDTO, @PathVariable String guidId) {
-        return guideService.updateGuide(guideDTO, guidId).map(updatedGuid ->
-                new ResponseUtil(200, "Guid updated Success...", null));
+    @PutMapping(value = "/update",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ResponseUtil> updateGuidData(@RequestBody GuideDTO guideDTO) {
+        return guideService.updateGuide(guideDTO).map(updatedGuid ->
+                new ResponseUtil(200, "Guid updated Success",null));
     }
 
     //handle Delete request to delete guide details by id
-    @DeleteMapping("{guidId}")
+    @DeleteMapping(path = "{guidId}",produces =MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseUtil> deleteGuidData(@PathVariable String guidId) {
         return guideService.deleteGuide(guidId).map(removedGuid ->
-                new ResponseUtil(200, "Guid Removed...", null));
+                new ResponseUtil(200, guidId+" Guid Removed...", null));
     }
 
 
