@@ -16,7 +16,9 @@ public class TravelPackage {
     private String packageName;
     private String packageDescription;
     private String packageCategory;
+    private int dayCount;
     private String travelAreas;
+    private int nightCount;
     private String allowPets;
     private String roomTypes;
     private String travelPackageVideoUrl;

@@ -20,6 +20,7 @@ public class PackageServiceImpl implements TravelPackageService {
 
     private final ModelMapper modelMapper;
 
+    //save travel packages in database
     @Override
     public Mono<TravelPackageDTO> savePackage(TravelPackageDTO packageDTO) {
         TravelPackage travelPackage = modelMapper.map(packageDTO, TravelPackage.class);
@@ -27,12 +28,14 @@ public class PackageServiceImpl implements TravelPackageService {
                 .map(savedPackage->modelMapper.map(savedPackage,TravelPackageDTO.class));
     }
 
+    //get travel package from database
     @Override
     public Mono<TravelPackageDTO> getPackage(String packageName) {
         Mono<TravelPackage> byPackageName = packageRepository.findByPackageName(packageName);
         return byPackageName.map(getPackage ->modelMapper.map(getPackage,TravelPackageDTO.class));
     }
 
+    //get All travel packages from database
     @Override
     public Flux<TravelPackageDTO> getAllPackages() {
         Flux<TravelPackage> allPackages = packageRepository.findAll();
@@ -40,11 +43,13 @@ public class PackageServiceImpl implements TravelPackageService {
                 .switchIfEmpty(Flux.empty());
     }
 
+    //update travel packages in database
     @Override
     public Mono<TravelPackageDTO> updatePackage(TravelPackageDTO packageDTO, int packageId) {
         return null;
     }
 
+    //delete travel package from database
     @Override
     public Mono<Void> deletePackage(int packageId) {
         return packageRepository.deleteByPackageId(packageId);
