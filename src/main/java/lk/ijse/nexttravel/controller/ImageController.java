@@ -30,19 +30,16 @@ public class ImageController {
     @GetMapping("/download/{imageId}")
     public ResponseEntity<FileSystemResource> downloadImage(@PathVariable String imageId) {
         // Get the file path based on the image ID or URL
-        System.out.println("awaaaa");
         Mono<String> filePath = imageService.getImageUrlById(imageId);
         System.out.println(filePath);
 
         if (filePath != null) {
             // Create a FileSystemResource representing the file
             FileSystemResource resource = new FileSystemResource(new File(String.valueOf((filePath))));
-            System.out.println("pahukaa2");
             // Define response headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             headers.setContentDispositionFormData("attachment", "downloaded_image"); // Change the filename if needed
-            System.out.println("pahukaa3");
             // Return the file as a ResponseEntity
             return ResponseEntity.ok()
                     .headers(headers)
