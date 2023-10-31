@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "Cancellation_Policy")
+@Document(value = "cancellation-policy")
 public class CancellationPolicy {
     @Id
     private int can_policy_id;

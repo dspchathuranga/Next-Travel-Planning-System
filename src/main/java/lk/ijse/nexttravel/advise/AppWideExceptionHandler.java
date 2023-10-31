@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-@CrossOrigin(origins = {"http://127.0.0.1:5500"})
+@CrossOrigin(origins = {"*"})
 public class AppWideExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({RuntimeException.class})
     public ResponseUtil handleException(RuntimeException e){
+        e.printStackTrace();
         return new ResponseUtil(500,e.getMessage(),null);
     }
 }

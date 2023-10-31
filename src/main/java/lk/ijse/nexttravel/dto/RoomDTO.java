@@ -1,23 +1,22 @@
-package lk.ijse.nexttravel.entity;
+package lk.ijse.nexttravel.dto;
 
+import lk.ijse.nexttravel.entity.CancellationPolicy;
+import lk.ijse.nexttravel.entity.MealPlane;
+import lk.ijse.nexttravel.entity.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "room-details")
-public class RoomDetails {
-    @Id
+public class RoomDTO {
     private int room_id;
     private String room_name;
-    private List<MealPlane> mealPlaneList;
-    private List<RoomType> roomTypeList;
+    private List<MealPlaneDTO> mealPlaneList;
+    private List<RoomTypeDTO> roomTypeList;
     private boolean is_AC;
     private int adulte_count;
     private int child_count;
