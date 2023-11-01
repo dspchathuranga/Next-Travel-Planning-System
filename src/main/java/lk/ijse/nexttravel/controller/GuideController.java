@@ -28,16 +28,6 @@ public class GuideController {
                 new ResponseUtil(200, "Guide saved Success...", null));
     }
 
-//    //handle autoGenaratedGuidId
-    @GetMapping(value = "/latestId",produces =MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseUtil>generateGuideId() {
-        System.out.println("i came");
-       return guideService.generateGuideId().map(newId->{
-           System.out.println("new Id :"+newId);
-           return new ResponseUtil(200,"genarated Id",newId);
-       });
-    }
-
     //handle guid get request
     @GetMapping(path = "{guidName}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ResponseUtil> getGuide(@PathVariable String guidName) {

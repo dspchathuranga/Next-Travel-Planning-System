@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class HotelDTO {
-    private int hotelId;
+    private String hotelId;
     private String hotelName;
     private HotelCategoryDTO hotelCategoryDTO;
     private String email;

@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RoomTypeDTO {
-    private String roomTypeId;
-    private String roomTypeName;
+public class HotelMealPlaneDTO {
+    private String mealPlaneId;
+    private String mealPlaneName;
     private String status;
+    private double adultPrice;
+    private double childPrice;
 }

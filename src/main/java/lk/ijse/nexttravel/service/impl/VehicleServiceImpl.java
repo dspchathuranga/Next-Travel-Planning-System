@@ -47,7 +47,7 @@ public class VehicleServiceImpl implements VehicleService {
     //update Vehicle details in db
     @Override
     public Mono<VehicleDTO> updateVehicle(VehicleDTO vehicleDTO) {
-        Mono<Vehicle> updateByVehicleId = vehicleRepository.findByVehicleId(vehicleDTO.getVehicleId());
+        Mono<Vehicle> updateByVehicleId = vehicleRepository.findById(vehicleDTO.getVehicleId());
         return updateByVehicleId.flatMap(existvehicle -> {
             existvehicle.setVehicleCategory(vehicleDTO.getVehicleCategory());
             existvehicle.setVehicleName(vehicleDTO.getVehicleName());
@@ -65,7 +65,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     //delete Vehicle details in db
     @Override
-    public Mono<Void> deleteVehicle(int vehicleId) {
-        return vehicleRepository.deleteByVehicleId(vehicleId);
+    public Mono<Void> deleteVehicle(String vehicleId) {
+        return vehicleRepository.deleteById(vehicleId);
     }
 }

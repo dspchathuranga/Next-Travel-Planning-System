@@ -8,7 +8,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface GuideRepository extends ReactiveMongoRepository<Guide,String> {
-    @Query(value ="{}",sort = "{_id: -1}")
-    Mono<String>findLatestGuidId();
     Mono<Guide>findByGuidName(String guidName);
 }

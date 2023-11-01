@@ -10,6 +10,6 @@ public interface TravelPackageService {
     Mono<TravelPackageDTO> savePackage(TravelPackageDTO packageDTO);
     Mono<TravelPackageDTO>getPackage(String packageName);
     Flux<TravelPackageDTO> getAllPackages();
-    Mono<TravelPackageDTO>updatePackage(TravelPackageDTO packageDTO,int packageId);
-    Mono<Void>deletePackage(int packageId);
+    Mono<TravelPackageDTO>updatePackage(TravelPackageDTO packageDTO,String packageId);
+    Mono<Void>deletePackage(String packageId);
 }

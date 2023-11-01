@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "Room_Type_count")
 public class RoomTypeCount {
     @Id
-    private int room_type_count_id;
+    private String room_type_count_id;
     private int room_type_id;
     private int room_count;
 }

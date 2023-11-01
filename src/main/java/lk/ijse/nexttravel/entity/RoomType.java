@@ -12,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "room-type")
 public class RoomType {
     @Id
-    private int room_type_id;
-    private String room_type_name;
+    private String roomTypeId;
+    private String roomTypeName;
     private String status;
-    private int headCount;
 }
