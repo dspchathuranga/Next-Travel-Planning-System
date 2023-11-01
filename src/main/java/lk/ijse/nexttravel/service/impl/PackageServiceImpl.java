@@ -45,13 +45,13 @@ public class PackageServiceImpl implements TravelPackageService {
 
     //update travel packages in database
     @Override
-    public Mono<TravelPackageDTO> updatePackage(TravelPackageDTO packageDTO, int packageId) {
+    public Mono<TravelPackageDTO> updatePackage(TravelPackageDTO packageDTO, String packageId) {
         return null;
     }
 
     //delete travel package from database
     @Override
-    public Mono<Void> deletePackage(int packageId) {
-        return packageRepository.deleteByPackageId(packageId);
+    public Mono<Void> deletePackage(String packageId) {
+        return packageRepository.deleteById(packageId);
     }
 }

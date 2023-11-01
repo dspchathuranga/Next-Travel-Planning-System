@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface HotelRepository extends ReactiveMongoRepository<Hotel,Integer> {
+public interface HotelRepository extends ReactiveMongoRepository<Hotel,String> {
     Mono<Guide>findByHotelName(String hotelName);
-    Mono<Guide>findByHotelId(int hotelId);
-    Mono<Void>deleteByHotelId(int hotelId);
+    Mono<Guide>findByHotelId(String hotelId);
+    Mono<Void>deleteByHotelId(String hotelId);
 }

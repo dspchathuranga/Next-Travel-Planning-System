@@ -29,14 +29,6 @@ public class GuideServiceImpl implements GuideService {
                 .map(savedGuid -> modelMapper.map(savedGuid, GuideDTO.class));
     }
 
-    //Auto genarated guidId
-    @Override
-    public Mono<String> generateGuideId() {
-        Mono<String> latestId = guideRepository.findLatestGuidId();
-        System.out.println("service :"+latestId);
-        return latestId;
-    }
-
     //get guid details by guid id
     @Override
     public Mono<GuideDTO> getGuide(String guidName) {

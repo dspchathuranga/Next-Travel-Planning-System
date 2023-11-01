@@ -12,6 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "FuelType")
 public class FuelType {
     @Id
-    private int fuel_type_id;
+    private String fuel_type_id;
     private String fuel_type_name;
 }

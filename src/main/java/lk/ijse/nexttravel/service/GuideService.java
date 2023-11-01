@@ -8,7 +8,6 @@ import reactor.core.publisher.Mono;
 
 public interface GuideService {
     Mono<GuideDTO>saveGuide(GuideDTO guideDTO);
-    Mono<String>generateGuideId();
     Mono<GuideDTO>getGuide(String guidName);
     Flux<GuideDTO>getAllGuides();
     Mono<GuideDTO>updateGuide(GuideDTO guideDTO);

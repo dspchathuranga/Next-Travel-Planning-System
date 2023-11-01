@@ -16,7 +16,7 @@ import java.util.List;
 @Document(value = "hotel")
 public class Hotel {
     @Id
-    private int hotelId;
+    private String hotelId;
     private String hotelName;
     private HotelCategory hotelCategory;
     private String email;

@@ -9,10 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "hotel-category")
-public class HotelCategory {
-    @Id
-    private String hotelCategoryId;
-    private String hotelCategoryName;
+public class HotelMealPlane {
+    private String mealPlaneId;
+    private String mealPlaneName;
     private String status;
+    private double adultPrice;
+    private double childPrice;
 }

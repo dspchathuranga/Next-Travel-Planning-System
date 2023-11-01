@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "Driver_details")
 public class Driver {
     @Id
-    private int driver_id;
+    private String driver_id;
     private String driver_name;
     private String driver_contact_No;
     private byte[] driver_licen_front;

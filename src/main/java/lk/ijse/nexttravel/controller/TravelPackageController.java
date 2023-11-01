@@ -35,13 +35,13 @@ public class TravelPackageController {
     }
 
     @PutMapping("{packageId}")
-    public Mono<ResponseUtil> updatePackageDetails(@RequestBody TravelPackageDTO packageDTO, @PathVariable int packageId) {
+    public Mono<ResponseUtil> updatePackageDetails(@RequestBody TravelPackageDTO packageDTO, @PathVariable String packageId) {
         return packageService.updatePackage(packageDTO, packageId).map(updatedPackage ->
                 new ResponseUtil(200, "Package updated", null));
     }
 
     @DeleteMapping("{packageId}")
-    public Mono<ResponseUtil> deletePackage(@PathVariable int packageId) {
+    public Mono<ResponseUtil> deletePackage(@PathVariable String packageId) {
         return packageService.deletePackage(packageId).map(deletedPackage ->
                 new ResponseUtil(200, "package deleted", null));
     }

@@ -12,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "meal-plane")
 public class MealPlane {
     @Id
-    private int meal_plane_id;
-    private String meal_plane_name;
+    private String mealPlaneId;
+    private String mealPlaneName;
     private String status;
-    private double price;
 }

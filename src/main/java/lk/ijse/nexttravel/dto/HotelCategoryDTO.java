@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class HotelCategoryDTO {
-    private int hotel_category_id;
-    private String hotel_category_name;
+    private String hotelCategoryId;
+    private String hotelCategoryName;
+    private String status;
 }

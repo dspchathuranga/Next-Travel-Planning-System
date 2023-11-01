@@ -1,5 +1,7 @@
 package lk.ijse.nexttravel.entity;
 
+import lk.ijse.nexttravel.dto.HotelMealPlaneDTO;
+import lk.ijse.nexttravel.dto.HotelRoomTypeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,21 +13,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "room-details")
+//@Document(value = "room-details")
 public class RoomDetails {
-    @Id
-    private int room_id;
-    private String room_name;
-    private List<MealPlane> mealPlaneList;
-    private List<RoomType> roomTypeList;
-    private boolean is_AC;
-    private int adulte_count;
-    private int child_count;
-    private boolean is_pets_allow;
+    private String roomId;
+    private String roomName;
+    private List<HotelMealPlane> hotelMealPlaneList;
+    private List<HotelRoomType> hotelRoomTypeList;
+    private boolean isAC;
+    private boolean isPetsAllow;
     private CancellationPolicy cancellationPolicy;
-    private double price_day;
-    private double price_day_discount;
-    private double price_night;
-    private double price_night_discount;
+    private double priceDay;
+    private double priceDayDiscount;
+    private double priceNight;
+    private double priceNightDiscount;
     private String status;
 }

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Data
 public class DriverDTO {
-    private int driver_id;
+    private String driver_id;
     private String driver_name;
     private String driver_contact_No;
     private byte[] driver_licen_front;

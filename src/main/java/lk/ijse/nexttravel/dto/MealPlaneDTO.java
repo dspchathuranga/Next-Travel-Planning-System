@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class MealPlaneDTO {
-    private int meal_plane_id;
-    private String meal_plane_name;
+    private String mealPlaneId;
+    private String mealPlaneName;
     private String status;
-    private double price;
 }
