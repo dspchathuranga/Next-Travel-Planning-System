@@ -32,12 +32,12 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Mono<HotelDTO> saveHotelDetails(HotelDTO hotelDTO) {
         Hotel saveHotel = modelMapper.map(hotelDTO, Hotel.class);
-        hotelDTO.getRoomDTOList().stream().forEach(roomDTO -> System.out.println(roomDTO.toString()));
+        //hotelDTO.getRoomDTOList().stream().forEach(roomDTO -> System.out.println(roomDTO.toString()));
         saveHotel.setRoomDetailsList(
                 hotelDTO.getRoomDTOList().stream().map(roomDTO -> modelMapper.map(roomDTO, RoomDetails.class)).toList()
         );
-        saveHotel.getRoomDetailsList().stream().forEach(roomDetails -> System.out.println(roomDetails.toString()));
-        System.out.println(saveHotel.getRoomDetailsList());
+        //saveHotel.getRoomDetailsList().stream().forEach(roomDetails -> System.out.println(roomDetails.toString()));
+        //System.out.println(saveHotel.getRoomDetailsList());
         return hotelRepository.save(saveHotel)
                 .map(savedHotel -> {
                     HotelDTO savedHotelDTO = modelMapper.map(savedHotel, HotelDTO.class);
@@ -81,7 +81,21 @@ public class HotelServiceImpl implements HotelService {
         Mono<Hotel> updateHotel = hotelRepository.findById(saveHotel.getHotelId());
 
         if(updateHotel != null){
-            return hotelRepository.save(saveHotel).map(hotel -> modelMapper.map(hotel,  HotelDTO.class));
+            return hotelRepository.save(saveHotel).map(hotel -> {
+                HotelDTO savedHotelDTO = modelMapper.map(hotel, HotelDTO.class);
+                savedHotelDTO.setHotelCategoryDTO(modelMapper.map(hotel.getHotelCategory(), HotelCategoryDTO.class));
+                savedHotelDTO.setRoomDTOList(hotel.getRoomDetailsList().stream().map(roomDetails -> {
+                    RoomDTO roomDTO = modelMapper.map(roomDetails, RoomDTO.class);
+                    roomDTO.setHotelRoomTypeDTOList(roomDetails.getHotelRoomTypeList().stream().map(
+                            hotelRoomType -> modelMapper.map(hotelRoomType, HotelRoomTypeDTO.class)
+                    ).toList());
+                    roomDTO.setHotelMealPlaneDTOList(roomDetails.getHotelMealPlaneList().stream().map(
+                            hotelMealPlane -> modelMapper.map(hotelMealPlane, HotelMealPlaneDTO.class)
+                    ).toList());
+                    return roomDTO;
+                }).toList());
+                return savedHotelDTO;
+            });
         }
         return  updateHotel.map(hotel -> modelMapper.map(hotel,  HotelDTO.class));
     }
@@ -105,7 +119,21 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Mono<HotelDTO> getHotelDetailById(String hotelId) {
-        return hotelRepository.findById(hotelId).map(hotel -> modelMapper.map(hotel, HotelDTO.class));
+        return hotelRepository.findById(hotelId).map(hotel -> {
+            HotelDTO hotelDTO = modelMapper.map(hotel, HotelDTO.class);
+            hotelDTO.setHotelCategoryDTO(modelMapper.map(hotel.getHotelCategory(), HotelCategoryDTO.class));
+            hotelDTO.setRoomDTOList(hotel.getRoomDetailsList().stream().map(roomDetails -> {
+                RoomDTO roomDTO = modelMapper.map(roomDetails, RoomDTO.class);
+                roomDTO.setHotelRoomTypeDTOList(roomDetails.getHotelRoomTypeList().stream().map(
+                        hotelRoomType -> modelMapper.map(hotelRoomType, HotelRoomTypeDTO.class)
+                ).toList());
+                roomDTO.setHotelMealPlaneDTOList(roomDetails.getHotelMealPlaneList().stream().map(
+                        hotelMealPlane -> modelMapper.map(hotelMealPlane, HotelMealPlaneDTO.class)
+                ).toList());
+                return roomDTO;
+            }).toList());
+            return hotelDTO;
+        });
     }
 
     @Override
