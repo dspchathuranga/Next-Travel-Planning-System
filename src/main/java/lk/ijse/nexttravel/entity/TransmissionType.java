@@ -9,9 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "Transmission_Type")
+@Document(value = "transmission-type")
 public class TransmissionType {
     @Id
-    private String transmission_type_id;
-    private String transmission_type_name;
+    private String transmissionTypeId;
+    private String transmissionTypeName;
+    private String status;
 }

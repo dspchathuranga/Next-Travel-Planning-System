@@ -12,8 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "cancellation-policy")
 public class CancellationPolicy {
     @Id
-    private String can_policy_id;
-    private String can_policy_name;
-    private double cancel_fee;
-    private String can_policy_details;
+    private String canPolicyId;
+    private String canPolicyName;
+    private double cancelFee;
+    private String canPolicyDetails;
+    private String status;
 }

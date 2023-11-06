@@ -9,9 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "Vehicle_category")
+@Document(value = "vehicle-category")
 public class VehicleCategory {
     @Id
-    private int vehicle_category_id;
-    private String vehicle_category_name;
+    private int vehicleCategoryId;
+    private String vehicleCategoryName;
+    private String status;
 }

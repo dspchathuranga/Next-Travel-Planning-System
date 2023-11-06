@@ -18,4 +18,5 @@ public class TravelPackageDTO {
     private String allowPets;
     private String roomTypes;
     private String travelPackageVideoUrl;
+    private String status;
 }

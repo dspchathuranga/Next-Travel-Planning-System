@@ -1,19 +1,15 @@
-package lk.ijse.nexttravel.entity;
+package lk.ijse.nexttravel.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "travel-package-promotion")
-public class TravelPackagePromotion {
-    @Id
+public class TravelPackagePromotionDTO {
     private String promotionId;
     private String travelPackageId;
     private double hotelDiscount;

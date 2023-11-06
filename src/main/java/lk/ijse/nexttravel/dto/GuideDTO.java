@@ -19,4 +19,5 @@ public class GuideDTO {
 //    private byte[] guideProfile;
     private String remarks;
     private int policyId;
+    private String status;
 }

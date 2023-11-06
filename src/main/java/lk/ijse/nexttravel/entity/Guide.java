@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "Guid_details")
+@Document(value = "guid-details")
 public class Guide{
     @Id
     private String guidId;
@@ -23,4 +23,5 @@ public class Guide{
     private String remarks;
 //    private byte[] guideProfile;
     private int policyId;
+    private String status;
 }

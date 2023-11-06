@@ -21,4 +21,5 @@ public class VehicleDTO {
     private double vehicle1kmCharge;
     private String remarks;
     private String policyType;
+    private String status;
 }

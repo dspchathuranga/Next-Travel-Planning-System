@@ -9,9 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "FuelType")
+@Document(value = "fuel-type")
 public class FuelType {
     @Id
-    private String fuel_type_id;
-    private String fuel_type_name;
+    private String fuelTypeId;
+    private String fuelTypeName;
+    private String status;
 }

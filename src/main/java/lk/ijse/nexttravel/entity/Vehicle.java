@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "Vehicle_details")
+@Document(value = "vehicle-details")
 public class Vehicle {
     @Id
     private int vehicleId;
@@ -25,4 +25,5 @@ public class Vehicle {
     private double vehicle1kmCharge;
     private String remarks;
     private String policyType;
+    private String status;
 }

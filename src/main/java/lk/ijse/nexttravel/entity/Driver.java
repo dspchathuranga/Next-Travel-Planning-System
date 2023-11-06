@@ -9,12 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(value = "Driver_details")
+@Document(value = "driver-details")
 public class Driver {
     @Id
-    private String driver_id;
-    private String driver_name;
-    private String driver_contact_No;
-    private byte[] driver_licen_front;
-    private byte[] driver_licen_back;
+    private String driverId;
+    private String driverName;
+    private String driverContactNo;
+    private byte[] driverLicenFront;
+    private byte[] driverLicenBack;
+    private String status;
 }
